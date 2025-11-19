@@ -1,5 +1,6 @@
-import pygame
 import random
+
+import pygame
 
 # ----------------------------
 # Konfigurasi dasar
@@ -17,6 +18,7 @@ PADDLE_SPEED = 6
 AI_SPEED = 5  # buat AI tidak terlalu sempurna
 BALL_SPEED_X_INIT = 6
 BALL_SPEED_Y_MAX = 6  # batas kecepatan vertikal bola
+
 
 # ----------------------------
 # Kelas Game Objects
@@ -54,10 +56,7 @@ class Paddle:
 class Ball:
     def __init__(self, size):
         self.rect = pygame.Rect(
-            WIDTH // 2 - size // 2,
-            HEIGHT // 2 - size // 2,
-            size,
-            size
+            WIDTH // 2 - size // 2, HEIGHT // 2 - size // 2, size, size
         )
         self.vx = random.choice([-1, 1]) * BALL_SPEED_X_INIT
         self.vy = random.randint(-3, 3) or 3  # hindari nol
@@ -133,8 +132,16 @@ def main():
     font = pygame.font.SysFont(None, 48)
 
     # Objek
-    player = Paddle(30, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_SPEED)
-    ai = Paddle(WIDTH - 30 - PADDLE_WIDTH, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT, AI_SPEED)
+    player = Paddle(
+        30, HEIGHT // 2 - PADDLE_HEIGHT // 2, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_SPEED
+    )
+    ai = Paddle(
+        WIDTH - 30 - PADDLE_WIDTH,
+        HEIGHT // 2 - PADDLE_HEIGHT // 2,
+        PADDLE_WIDTH,
+        PADDLE_HEIGHT,
+        AI_SPEED,
+    )
     ball = Ball(BALL_SIZE)
 
     player_score = 0
